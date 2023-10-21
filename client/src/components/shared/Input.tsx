@@ -10,7 +10,7 @@ const StyledInput = styled.input`
   }
 
   background: transparent;
-  padding: 0.6875rem 1.25rem;
+  padding: 0.625rem 1.1875rem;
   border-radius: 1.875rem;
 
   ${typography.normal}
