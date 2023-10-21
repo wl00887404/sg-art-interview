@@ -1,8 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './reset.css';
 import App from './App';
+import { createGlobalStyle } from 'styled-components';
+
 // import reportWebVitals from './reportWebVitals';
+
+const GlobalStyle = createGlobalStyle`
+  :root {
+    font-size: 16px;
+    font-family: 'Inter';
+    --primary-color: #a370ff;
+    --white: #ffffff;
+    --dark-gray: #5f596c;
+  }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #17121f;
+  }
+
+`;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -10,6 +33,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
+    <GlobalStyle />
     <App />
   </React.StrictMode>,
 );
