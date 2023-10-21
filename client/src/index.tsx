@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --primary-color: #a370ff;
     --white: #ffffff;
     --dark-gray: #5f596c;
+    --error: #ff3c78;
   }
 
   *,
