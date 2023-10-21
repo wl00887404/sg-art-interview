@@ -18,7 +18,7 @@ const Button = styled.button`
   border-radius: 2px;
   width: 0.9375rem;
   height: 0.9375rem;
-  margin: 0.125rem 0.375rem 0 0;
+  margin: var(--checkbox-margin-top, 0.125rem) 0.375rem 0 0;
   color: var(--white);
   padding: 0;
   line-height: inherit;
@@ -26,29 +26,31 @@ const Button = styled.button`
   overflow: hidden;
 `;
 
-const TranslateUpText = styled.div`
-  transform: translate(0, -0.125rem);
+const Indicator = styled.div`
+  transform: translate(0, calc(var(--checkbox-margin-top, 0.125rem) * -1));
 `;
 
 type Props = {
   checked: boolean;
   children: React.ReactNode;
-  onChange: (checked: boolean) => void;
+  className?: string;
+  onChange?: (checked: boolean) => void;
 };
 
 const Checkbox = (props: Props) => {
-  const { checked, children, onChange } = props;
+  const { checked, children, onChange, className } = props;
   const checkboxRef = useRef<HTMLInputElement>(null);
   const onCheckboxChange = () => {
+    if (!onChange) return;
     onChange(checkboxRef.current!.checked);
   };
 
   const onButtonClick = () => checkboxRef.current!.click();
 
   return (
-    <Container>
+    <Container className={className}>
       <Button role="checkbox" onClick={onButtonClick}>
-        {checked && <TranslateUpText>v</TranslateUpText>}
+        {checked && <Indicator>v</Indicator>}
       </Button>
       <label>
         <Input

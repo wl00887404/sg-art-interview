@@ -19,6 +19,7 @@ const StyledInput = styled.input`
 const ErrorMessage = styled.div`
   padding: 0 0.75rem;
   color: var(--error);
+  margin-top: var(--error-margin-top, 0);
   ${typography.small}
 
   &:not(:empty)::before {
@@ -32,14 +33,15 @@ type InputProps = React.DetailedHTMLProps<
 >;
 
 type Props = InputProps & {
+  className?: string;
   error?: string;
 };
 
 const Input = (props: Props) => {
-  const { error, ...otherProps } = props;
+  const { error, className, ...otherProps } = props;
 
   return (
-    <div>
+    <div className={className}>
       <StyledInput {...otherProps} />
       <ErrorMessage>{error}</ErrorMessage>
     </div>
