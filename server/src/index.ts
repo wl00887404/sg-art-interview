@@ -70,11 +70,7 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.post('/api/register', async (req, res) => {
-  const { email, password, confirmsPassword } = req.body;
-
-  if (password !== confirmsPassword) {
-    return res.json(createFailedResponse('密碼與確認密碼不相符'));
-  }
+  const { email, password } = req.body;
 
   const hasExisted = await User.find({ email }).count();
   if (hasExisted) {
