@@ -19,17 +19,15 @@ const userSchema = new Schema(
   },
   {
     methods: {
-      comparePassword(password: string) {
+      async comparePassword(password: string) {
         return argon2.verify(this.password, password);
+      },
+      async hashPassword() {
+        this.password = await argon2.hash(this.password);
       },
     },
   },
 );
-
-userSchema.pre('save', async function (next) {
-  this.password = await argon2.hash(this.password);
-  next();
-});
 
 const User = mongoose.model('User', userSchema);
 

@@ -26,7 +26,7 @@ app.use('*', async (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, JWT_SECRET!) as { email: string };
-    
+
     const user = await User.findOne({ email: payload.email });
     if (user === null) throw new Error('查無此使用者');
 
@@ -82,6 +82,7 @@ app.post('/api/register', async (req, res) => {
   }
 
   const user = new User({ email, password });
+  await user.hashPassword();
   await user.save();
 
   return res.json(
