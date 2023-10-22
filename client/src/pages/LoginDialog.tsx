@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Form, { Field } from 'rc-field-form';
+import Form, { Field, FormInstance } from 'rc-field-form';
 import axios from 'axios';
 
 import { emailRegex } from '../libs/regex';
@@ -43,47 +43,47 @@ const LoginDialog = () => {
     window.location.href = '/';
   };
 
+  const renderForm = (_values: any, form: FormInstance<any>) => {
+    return (
+      <>
+        <EmailInputContainer>
+          <Field
+            name="email"
+            initialValue=""
+            rules={[
+              { required: true, message: '電子信箱為必填項目' },
+              { pattern: emailRegex, message: '請輸入有效的電子信箱' },
+            ]}
+          >
+            <Input
+              type="text"
+              placeholder="請輸入 Email 帳號"
+              error={form.getFieldError('email')[0]}
+            />
+          </Field>
+        </EmailInputContainer>
+        <PasswordInputContainer>
+          <Field name="password" initialValue="">
+            <Input
+              type="password"
+              placeholder="請輸入密碼"
+              error={isLoginFailed ? '密碼錯誤' : ''}
+            />
+          </Field>
+        </PasswordInputContainer>
+        <ButtonContainer>
+          <Link to="/register">
+            <StyledGhostButton type="button">註冊會員</StyledGhostButton>
+          </Link>
+          <PrimaryButton type="submit">登入</PrimaryButton>
+        </ButtonContainer>
+      </>
+    );
+  };
+
   return (
     <Dialog title="會員登入">
-      <Form onFinish={login}>
-        {(_values, form) => {
-          return (
-            <>
-              <EmailInputContainer>
-                <Field
-                  name="email"
-                  initialValue=""
-                  rules={[
-                    { required: true, message: '電子信箱為必填項目' },
-                    { pattern: emailRegex, message: '請輸入有效的電子信箱' },
-                  ]}
-                >
-                  <Input
-                    type="text"
-                    placeholder="請輸入 Email 帳號"
-                    error={form.getFieldError('email')[0]}
-                  />
-                </Field>
-              </EmailInputContainer>
-              <PasswordInputContainer>
-                <Field name="password" initialValue="">
-                  <Input
-                    type="password"
-                    placeholder="請輸入密碼"
-                    error={isLoginFailed ? '密碼錯誤' : ''}
-                  />
-                </Field>
-              </PasswordInputContainer>
-              <ButtonContainer>
-                <Link to="/register">
-                  <StyledGhostButton type="button">註冊會員</StyledGhostButton>
-                </Link>
-                <PrimaryButton type="submit">登入</PrimaryButton>
-              </ButtonContainer>
-            </>
-          );
-        }}
-      </Form>
+      <Form onFinish={login}>{renderForm}</Form>
     </Dialog>
   );
 };
