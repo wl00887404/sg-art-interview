@@ -26,6 +26,7 @@ type Props = {
   finished: boolean;
   content: string;
   setTodoFinished: (id: string, finished: boolean) => void;
+  deleteTodo: (id: string) => void;
 };
 
 const Item = (props: Props) => {
@@ -34,13 +35,16 @@ const Item = (props: Props) => {
   const setTodoFinished = (finished: boolean) => {
     props.setTodoFinished(id, finished);
   };
+  const deleteTodo = () => {
+    props.deleteTodo(id);
+  };
 
   return (
     <Container>
       <Checkbox checked={finished} onChange={setTodoFinished}>
         {content}
       </Checkbox>
-      <IconButton>
+      <IconButton onClick={deleteTodo}>
         <CrossIcon />
       </IconButton>
       {finished && <Strikethrough />}
