@@ -31,7 +31,7 @@ const Indicator = styled.div`
 `;
 
 type Props = {
-  checked: boolean;
+  checked?: boolean;
   children: React.ReactNode;
   className?: string;
   onChange?: (checked: boolean) => void;
