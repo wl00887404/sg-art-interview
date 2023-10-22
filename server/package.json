@@ -17,6 +17,7 @@
   "scripts": {
     "start": "node ./build/index.js",
     "dev": "tsx watch src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "seeder:user": "tsx ./src/modules/User.seeder.ts"
   }
 }
