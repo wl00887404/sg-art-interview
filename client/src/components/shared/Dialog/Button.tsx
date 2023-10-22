@@ -5,6 +5,7 @@ export const GhostButton = styled.button`
   background: transparent;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
+  cursor: pointer;
 
   min-width: 5.75rem;
   padding: 0.375rem 0 0.4375rem;

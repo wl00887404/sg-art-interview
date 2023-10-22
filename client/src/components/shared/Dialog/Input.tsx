@@ -17,6 +17,7 @@ const StyledInput = styled.input`
 `;
 
 const ErrorMessage = styled.div`
+  min-height: 1rem;
   padding: 0 0.75rem;
   color: var(--error);
   margin-top: var(--error-margin-top, 0);
