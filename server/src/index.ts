@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import User from './modules/User';
+import todosRouter from './routes/todos';
 
 const PORT = 3001;
 const { JWT_SECRET } = process.env;
@@ -93,6 +94,8 @@ app.post('/api/register', async (req, res) => {
     }),
   );
 });
+
+app.use('/api/todos', todosRouter);
 
 app.listen(3001, function () {
   console.log(`Server is on http://localhost:${PORT}/api`);
